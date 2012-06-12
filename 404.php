@@ -1,5 +1,8 @@
 <?php
 
+$eCookie = ($_COOKIE['EMETA_NCLICK']!='' ? $_COOKIE['EMETA_NCLICK'] : '1'); 
+setcookie('EMETA_NCLICK',$eCookie,time() + (86400 * 30),"/","delawareonline.com"); 
+
 /**
  * The template for displaying 404 pages (Not Found).
  *

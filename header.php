@@ -38,6 +38,38 @@ remove_action( 'wp_head', 'adjacent_posts_rel_link_wp_head' );
 <script type="text/javascript" src="/odygel/lib/atypon/api.js"></script>
 <script type="text/javascript" src="/odygel/lib/firefly/firefly.js"></script>
 
+
+<!-- Kevin Tindall, 5/23/2012 -->
+<!-- Keeps the comments section of articles from incrementing the EMETA_NCLICK cookie -->
+<script>
+  if(window.location.hash) {
+	var hash = window.location.hash.substring(1);
+	var cookies = document.cookie.split(';');
+	
+	if(hash == 'respond' || hash == 'comments' || hash.indexOf("comment") != -1)
+	{
+
+
+		for(var i=0; i  < cookies.length; i++)
+		{
+			var theCookie = cookies[i];
+			var cookieandValue = theCookie.split('=');
+			if(cookieandValue[0].split(' ').join('') == 'EMETA_NCLICK')
+			{
+				var cookieINT = parseInt(cookieandValue[1]);
+				cookieandValue[1] = cookieINT-1;
+				var aDate = new Date();
+				var aDatePlus7Days = new Date(aDate.getTime() + 86400*7);
+				newCookie = cookieandValue[0] + "=" + cookieandValue[1] + "; expires=" + aDatePlus7Days.toGMTString() + "; path=/; domain=delawareonline.com";
+				document.cookie = newCookie;
+			}
+	
+		}
+	}
+      
+  }
+</script>
+
 <title><?php
 	/*
 	 * Print the <title> tag based on what is being viewed.

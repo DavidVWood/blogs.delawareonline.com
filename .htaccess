@@ -1,6 +1,13 @@
 RewriteEngine On
 RewriteBase /
 
+#Kevin Tindall, 05/23/2012
+#removes ?nclick_check causing a double hit
+#on the atypon adaptor
+RewriteCond %{QUERY_STRING} ^((.+)&)?nclick_check=1$ [NC]
+RewriteRule (.*) http://%{HTTP_HOST}/$1?%2 [R=301,L]
+
+
 #uploaded files
 RewriteRule ^(.*/)?files/$ index.php [L]
 RewriteCond %{REQUEST_URI} !.*wp-content/plugins.*

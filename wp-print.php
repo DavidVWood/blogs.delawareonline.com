@@ -1,5 +1,16 @@
 <?php
 
+//Kevin Tindall, 5/23/2012
+//Keeps EMETA_NCLICK cooke from incrementing so it doesnt
+//affect the amount of views the user still has
+
+if(basename($_SERVER['REQUEST_URI']) == 'print')
+{
+
+	$eCookie = ($_COOKIE['EMETA_NCLICK']!='' ? $_COOKIE['EMETA_NCLICK'] : '1'); 
+	setcookie('EMETA_NCLICK',$eCookie,time() + (86400 * 30),"/","delawareonline.com"); 
+}
+
 /*
 Plugin Name: WP-Print
 Plugin URI: http://lesterchan.net/portfolio/programming/php/
